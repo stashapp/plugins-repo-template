@@ -1,0 +1,4 @@
+name: demo-assets
+description: Demo plugin exercising a single # requires: id
+version: 1.0
+# requires: demo-brand

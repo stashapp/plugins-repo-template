@@ -12,6 +12,8 @@ _This assumes you already know how to create plugins for Stash. If you don't, fi
 
 Now add your plugins to [plugins](/plugins) directory and they will be automatically published to the source index.
 
+Plugin ids (the yml filename, without extension) must not contain whitespace — the build will fail otherwise. A plugin can declare dependencies on other plugins in this index with a `# requires:` comment, comma-separated: `# requires: pluginA,pluginB`.
+
 Source index URL: [`https://<your-username>.github.io/<repository-name>/main/index.yml`](https://<your-username>.github.io/<repository-name>/main/index.yml)
 
 ## Share your plugins

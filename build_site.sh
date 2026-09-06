@@ -22,6 +22,14 @@ buildPlugin()
     dir=$(dirname "$f")
     plugin_id=$(basename "$f" .yml)
 
+    case "$plugin_id" in
+        *[[:space:]]*)
+            echo "error: plugin id '$plugin_id' contains whitespace ($f)." \
+                 "Plugin ids are used as # requires: dependency names and must not contain spaces." >&2
+            exit 1
+            ;;
+    esac
+
     echo "Processing $plugin_id"
 
     # create a directory for the version
@@ -40,7 +48,7 @@ buildPlugin()
     description=$(grep -m1 "^description:" "$f" | cut -d' ' -f2- | sed -e 's/\r//' -e 's/^"\(.*\)"$/\1/' || true)
     ymlVersion=$(grep -m1 "^version:" "$f" | cut -d' ' -f2- | sed -e 's/\r//' -e 's/^"\(.*\)"$/\1/' || true)
     version="$ymlVersion-$version"
-    IFS=$'\n' dep=$(grep "^# requires:" "$f" | cut -c 12- | sed -e 's/\r//' || true)
+    dep=$(grep "^# requires:" "$f" | cut -c 12- | sed -e 's/\r//' || true)
 
     # write to spec index
     echo "- id: $plugin_id

@@ -1,0 +1,4 @@
+name: demo-all
+description: Demo plugin exercising comma-separated # requires: ids
+version: 1.0
+# requires: demo-assets,demo-brand
